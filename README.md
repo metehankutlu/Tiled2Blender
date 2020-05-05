@@ -1,2 +1,2 @@
-# tiled-map-importer-for-blender
+# TM Importer
 Blender addon to import map created in Tiled Map Editor.
