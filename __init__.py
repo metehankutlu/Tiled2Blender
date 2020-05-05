@@ -23,7 +23,11 @@ bl_info = {
 }
 
 import bpy
+from .MapDataOperator import MapDataOperator
+from .TilesetOperator import TilesetOperator
+from .ImportPanel import ImportPanel
 
-classes = ()
+
+classes = (MapDataOperator, TilesetOperator, ImportPanel)
 
 register, unregister = bpy.utils.register_classes_factory(classes)
