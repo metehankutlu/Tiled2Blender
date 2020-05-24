@@ -1,9 +1,11 @@
 import bpy
+from .MapDataOperator import MapDataOperator
+from .ImportOperator import ImportOperator
 
 class ImportPanel(bpy.types.Panel):
     bl_idname = "tm_importer.import_panel"
     bl_label = "Import Tilemap"
-    bl_category = "TM Import"
+    bl_category = "Tiled2Blender"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
 
@@ -12,10 +14,13 @@ class ImportPanel(bpy.types.Panel):
 
         layout.label(text="Map data: ")
 
-        row = layout.row()
-        row.operator('tm_importer.map_data_operator', text='Import Map Data')
+        if MapDataOperator.filepath != '':
+            row = layout.row()
+            row.label(text=MapDataOperator.filepath)
 
-        layout.label(text="Tileset: ")
-
         row = layout.row()
-        row.operator('tm_importer.tileset_operator', text='Import Tileset')
+        row.operator(MapDataOperator.bl_idname)
+
+        if MapDataOperator.filepath != '':
+            row = layout.row()
+            row.operator(ImportOperator.bl_idname)

@@ -12,9 +12,9 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-    "name" : "Tiled Map Import",
+    "name" : "Tiled2Blender",
     "author" : "metehankutlu",
-    "description" : "Tilemap import for Tiled Map Editor.",
+    "description" : "Tiled Map Importer for Blender",
     "blender" : (2, 80, 0),
     "version" : (0, 0, 1),
     "location" : "View3D",
@@ -24,10 +24,10 @@ bl_info = {
 
 import bpy
 from .MapDataOperator import MapDataOperator
-from .TilesetOperator import TilesetOperator
+from .ImportOperator import ImportOperator
 from .ImportPanel import ImportPanel
 
 
-classes = (MapDataOperator, TilesetOperator, ImportPanel)
+classes = (MapDataOperator, ImportOperator, ImportPanel)
 
 register, unregister = bpy.utils.register_classes_factory(classes)
