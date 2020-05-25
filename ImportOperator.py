@@ -41,6 +41,7 @@ class ImportOperator(Operator):
                             mat = bpy.data.materials[image_name]
                         else:
                             mat = bpy.data.materials.new(name=image_name)
+                            mat.blend_method = 'BLEND'
                             mat.use_nodes = True
                             bsdf = mat.node_tree.nodes['Principled BSDF']
                             tex = mat.node_tree.nodes.new('ShaderNodeTexImage')
@@ -49,7 +50,6 @@ class ImportOperator(Operator):
                             tex.image = bpy.data.images[image_name]
                             mat.node_tree.links.new(bsdf.inputs['Base Color'], tex.outputs['Color'])
                             mat.node_tree.links.new(bsdf.inputs['Alpha'], tex.outputs['Alpha'])
-                            mat.blend_method = 'ALPHA_BLEND'
                         if plane.data.materials:
                             plane.data.materials[0] = mat
                         else:
