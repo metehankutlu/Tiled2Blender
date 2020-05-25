@@ -59,10 +59,23 @@ class ImportOperator(Operator):
                         uv_layer = bm.loops.layers.uv.verify()
                         bm.faces.ensure_lookup_table()
                         tile_x, tile_y, tile_width, tile_height = tile[1]
-                        bm.faces[0].loops[0][uv_layer].uv = ((tile_x / tile_width) / (image_width / tile_width), 1 - (tile_y / tile_height + 1) / (image_height / tile_height))
-                        bm.faces[0].loops[1][uv_layer].uv = ((tile_x / tile_width + 1) / (image_width / tile_width), 1 - (tile_y / tile_height + 1) / (image_height / tile_height))
-                        bm.faces[0].loops[2][uv_layer].uv = ((tile_x / tile_width + 1) / (image_width / tile_width), 1 - (tile_y / tile_height) / (image_height / tile_height))
-                        bm.faces[0].loops[3][uv_layer].uv = ((tile_x / tile_width) / (image_width / tile_width), 1 - (tile_y / tile_height) / (image_height / tile_height))
+                        bottom_left = ((tile_x / tile_width) / (image_width / tile_width), 1 - (tile_y / tile_height + 1) / (image_height / tile_height))
+                        bottom_right = ((tile_x / tile_width + 1) / (image_width / tile_width), 1 - (tile_y / tile_height + 1) / (image_height / tile_height))
+                        top_right = ((tile_x / tile_width + 1) / (image_width / tile_width), 1 - (tile_y / tile_height) / (image_height / tile_height))
+                        top_left = ((tile_x / tile_width) / (image_width / tile_width), 1 - (tile_y / tile_height) / (image_height / tile_height))
+                        flipped_horizontally, flipped_vertically, flipped_diagonally = tile[2]
+                        if flipped_diagonally:
+                            bottom_right, top_left = top_left, bottom_right
+                        if flipped_horizontally:
+                            bottom_left, bottom_right = bottom_right, bottom_left
+                            top_right, top_left = top_left, top_right
+                        if flipped_vertically:
+                            bottom_left, top_left = top_left, bottom_left
+                            bottom_right, top_right = top_right, bottom_right
+                        bm.faces[0].loops[0][uv_layer].uv = bottom_left
+                        bm.faces[0].loops[1][uv_layer].uv = bottom_right
+                        bm.faces[0].loops[2][uv_layer].uv = top_right
+                        bm.faces[0].loops[3][uv_layer].uv = top_left
                         bmesh.update_edit_mesh(me)
                         bpy.ops.object.mode_set(mode='OBJECT')
 
