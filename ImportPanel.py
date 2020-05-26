@@ -1,9 +1,9 @@
 import bpy
 from .MapDataOperator import MapDataOperator
-from .ImportOperator import ImportOperator
+from .ImportButtonOperator import ImportButtonOperator
 
 class ImportPanel(bpy.types.Panel):
-    bl_idname = "tm_importer.import_panel"
+    bl_idname = "tiled_2_blender.import_panel"
     bl_label = "Import Tilemap"
     bl_category = "Tiled2Blender"
     bl_space_type = "VIEW_3D"
@@ -23,4 +23,4 @@ class ImportPanel(bpy.types.Panel):
 
         if MapDataOperator.filepath != '':
             row = layout.row()
-            row.operator(ImportOperator.bl_idname)
+            row.operator(ImportButtonOperator.bl_idname)

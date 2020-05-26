@@ -24,10 +24,11 @@ bl_info = {
 
 import bpy
 from .MapDataOperator import MapDataOperator
-from .ImportOperator import ImportOperator
+from .ImportButtonOperator import ImportButtonOperator
 from .ImportPanel import ImportPanel
+from .TimerOperator import TimerOperator
 
 
-classes = (MapDataOperator, ImportOperator, ImportPanel)
+classes = (TimerOperator, MapDataOperator, ImportButtonOperator, ImportPanel)
 
 register, unregister = bpy.utils.register_classes_factory(classes)

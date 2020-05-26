@@ -4,10 +4,12 @@ from bpy_extras.io_utils import ImportHelper
 from bpy.types import Operator
 
 class MapDataOperator(Operator, ImportHelper):
-    bl_idname = "tm_importer.map_data_operator"
+    bl_idname = "tiled_2_blender.map_data_operator"
     bl_label = "Select Map Data"
 
     filename_ext = ".txt"
+
+    filepath = ''
 
     filter_glob: bpy.props.StringProperty(
         default = "*.tmx",
